@@ -1,0 +1,105 @@
+<style>
+  .weather-container {
+    background: #000;
+    color: #fff;
+    font-family: monospace, sans-serif;
+    text-align: center;
+    padding: 2rem;
+    min-height: 100vh;
+  }
+
+  .weather-container h1 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #f00;
+    display: inline-block;
+    padding-bottom: 0.2rem;
+  }
+
+  .weather-container p, .weather-container ul {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .weather-container ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .weather-container li {
+    margin: 0.3rem 0;
+  }
+
+  .weather-container li::before {
+    content: '• ';
+    color: #f00;
+  }
+
+  .weather-container .error {
+    color: #f00;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  .weather-container form {
+    margin-top: 2rem;
+  }
+
+  .weather-container input[type="text"] {
+    font-size: 1rem;
+    padding: 0.4rem;
+    border: 1px solid #fff;
+    background: #111;
+    color: #fff;
+    width: 200px;
+  }
+
+  .weather-container button {
+    font-size: 1rem;
+    padding: 0.4rem 1rem;
+    margin-left: 0.5rem;
+    border: none;
+    background: #f00;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .weather-container button:hover {
+    background: #c00;
+  }
+</style>
+
+<div class="weather-container">
+  <h1>Weather</h1>
+
+  <% if @error.present? %>
+    <p class="error"><%= @error %></p>
+  <% else %>
+    <p>
+      Current weather in <strong><%= @actual_city %></strong>
+      <% if @city_entered.downcase != @actual_city.downcase %>
+        (you entered: <%= @city_entered %>)
+      <% end %>:
+    </p>
+
+    <ul>
+      <li>Temperature: <%= @temp %> °C</li>
+      <li>Conditions: <%= @description %></li>
+    </ul>
+  <% end %>
+
+  <form method="get" action="/weather">
+    <label for="city">Enter city:</label>
+    <input type="text" name="city" id="city" placeholder="e.g. Abuja" autocomplete="off" />
+    <button type="submit">Check</button>
+  </form>
+</div>
+
+
+
+
+
+
+
+
